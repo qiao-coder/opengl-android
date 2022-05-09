@@ -9,10 +9,17 @@ import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLES32;
+import android.opengl.Matrix;
 
 import androidx.annotation.RawRes;
 
 import com.example.opengl.util.ShaderUtil;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+
+import glm_.mat4x4.Mat4;
 
 /**
  * @author wuzhanqiao
@@ -20,6 +27,8 @@ import com.example.opengl.util.ShaderUtil;
  */
 public class Shader {
     private static final String TAG = "Shader";
+    protected final static int BYTES_PER_INT = 4;
+    protected final static int BYTES_PER_FLOAT = 4;
     private final Context context;
     private final int vertexShaderRawId;
     private final int fragShaderRawId;
@@ -55,6 +64,25 @@ public class Shader {
         int location = GLES20.glGetUniformLocation(program, name);
         checkLocation(location);
         GLES20.glUniform1f(location, value);
+    }
+
+    public void setMatrix(String name, Mat4 mat4) {
+        int location = GLES20.glGetUniformLocation(program, name);
+        checkLocation(location);
+
+        FloatBuffer floatBuffer = ByteBuffer
+                //矩阵4x4
+                .allocateDirect(4 * 4 * BYTES_PER_FLOAT)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+
+        GLES20.glUniformMatrix4fv(location, 1, false, mat4.to(floatBuffer));
+    }
+
+    public void setMatrix(String name, float[] matrix) {
+        int location = GLES20.glGetUniformLocation(program, name);
+        checkLocation(location);
+        GLES20.glUniformMatrix4fv(location, 1, false, matrix, 0);
     }
 
     private void checkLocation(int location) {
