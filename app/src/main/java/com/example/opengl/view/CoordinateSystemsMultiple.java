@@ -20,6 +20,6 @@ public class CoordinateSystemsMultiple extends GLSurfaceView {
         super(context, attrs);
         setEGLContextClientVersion(3);
         setRenderer(new CoordinateSystemsMultipleRender(context));
-        setRenderMode(RENDERMODE_CONTINUOUSLY);
+        setRenderMode(RENDERMODE_WHEN_DIRTY);
     }
 }
