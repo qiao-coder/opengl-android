@@ -157,7 +157,10 @@ public class CoordinateSystemsDepthRender extends BaseRender {
         GLES20.glViewport(0, 0, width, height);
     }
 
-    private float i;
+    private long duration = 5000;
+    private float angle = 0.0f;
+    private long lastTime = -1L;
+    private final double base = Math.PI / duration;
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glEnable(GL_DEPTH_TEST);
@@ -169,9 +172,15 @@ public class CoordinateSystemsDepthRender extends BaseRender {
         GLES20.glActiveTexture(GL_TEXTURE1);
         GLES20.glBindTexture(GL_TEXTURE_2D, texture2[0]);
 
-        i+= 0.01;
+        if (lastTime == -1L) {
+            lastTime = System.currentTimeMillis();
+        } else {
+            long interval = System.currentTimeMillis() - lastTime;
+            lastTime = System.currentTimeMillis();
+            angle += interval * base;
+        }
         Mat4 model = new Mat4();
-        model = glm.rotate(model, i * glm.radians(50.0f), new Vec3(0.5f, 1.0f, 0.0f));
+        model = glm.rotate(model, angle, new Vec3(0.5f, 1.0f, 0.0f));
         shader.setMatrix("model", model);
 
         Mat4 view = new Mat4();
