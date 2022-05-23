@@ -175,7 +175,7 @@ public class CoordinateSystemsMultipleRender extends BaseRender {
     private long duration = 5000;
     private float angle = 0.0f;
     private long lastTime = -1L;
-    private final double base = Math.PI / duration;
+    private final double base = 2 * Math.PI / duration;
 
     @Override
     public void onDrawFrame(GL10 gl) {
