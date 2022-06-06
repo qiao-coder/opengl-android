@@ -2,7 +2,6 @@ package com.example.opengl;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.opengl.databinding.ActCameraBinding;
 import com.example.opengl.databinding.ItemCameraBinding;
-
-import static glm_.Java.glm;
-import glm_.vec3.Vec3;
 
 /**
  * @author wuzhanqiao
@@ -31,6 +27,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private Class[] activities = {
             CameraCircleActivity.class,
+            CameraKeyboardActivity.class,
     };
 
     private ActCameraBinding binding;
