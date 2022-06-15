@@ -59,10 +59,6 @@ public abstract class ControlView extends View {
         fingerPaint.setColor(ContextCompat.getColor(context, android.R.color.white));
     }
 
-    public ControlView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     private float getScopeRadius() {
         return Math.min(getMeasuredWidth(), getMeasuredHeight()) / 2f - scopePaint.getStrokeWidth() / 2f;
     }
