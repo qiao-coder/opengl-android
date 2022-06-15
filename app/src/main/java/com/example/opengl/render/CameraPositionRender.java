@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.GLUtils;
-import android.util.Log;
 
 import com.example.opengl.R;
 import com.example.opengl.base.BaseRender;
@@ -43,7 +42,7 @@ import glm_.vec3.Vec3;
  * @author wuzhanqiao
  * @date 2022/5/11.
  */
-public class CameraKeyboardRender extends BaseRender {
+public class CameraPositionRender extends BaseRender {
     private float vertices[] = {
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
             0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
@@ -108,7 +107,7 @@ public class CameraKeyboardRender extends BaseRender {
     private int width;
     private int height;
 
-    public CameraKeyboardRender(Context context) {
+    public CameraPositionRender(Context context) {
         super(context);
     }
 
@@ -187,16 +186,16 @@ public class CameraKeyboardRender extends BaseRender {
     private Vec3 cameraFront = new Vec3(0.0f, 0.0f, -1.0f);
     private Vec3 cameraUp = new Vec3(0.0f, 1.0f, 0.0f);
 
-    private long deltaTime = 0; // 当前帧与上一帧的时间差
-    private long lastFrame = 0; // 上一帧的时间
+//    private long deltaTime = 0; // 当前帧与上一帧的时间差
+//    private long lastFrame = 0; // 上一帧的时间
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        long currentFrame = System.currentTimeMillis();
-        if (lastFrame != 0) {
-            deltaTime = currentFrame - lastFrame;
-        }
-        lastFrame = currentFrame;
+//        long currentFrame = System.currentTimeMillis();
+//        if (lastFrame != 0) {
+//            deltaTime = currentFrame - lastFrame;
+//        }
+//        lastFrame = currentFrame;
 
         GLES20.glEnable(GL_DEPTH_TEST);
         GLES20.glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -227,8 +226,10 @@ public class CameraKeyboardRender extends BaseRender {
     }
 
     public void move(Direction d) {
-        //0.05f的速度是在60fps的设备上的速度。现在的Android手机大多数是60fps的屏幕刷新率，即16.6ms刷新一帧
-        float cameraSpeed = deltaTime == 0 ? 0.05f : (0.05f / 16.6f * deltaTime);
+        move(d, 0.05f);
+    }
+
+    public void move(Direction d, float cameraSpeed) {
         switch (d) {
             case UP:
                 //即cameraPos += cameraSpeed * cameraFront

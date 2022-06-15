@@ -8,34 +8,51 @@ import static com.example.opengl.data.Direction.UP;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.example.opengl.data.Direction;
-import com.example.opengl.render.CameraKeyboardRender;
+import com.example.opengl.render.CameraViewRender;
 
 /**
  * @author wuzhanqiao
- * @date 2022/5/11.
+ * @date 2022/6/8.
  */
-public class CameraKeyboard extends GLSurfaceView {
+public class CameraView extends GLSurfaceView {
 
-    private CameraKeyboardRender cameraKeyboardRender;
+    private CameraViewRender cameraViewRender;
 
-    public CameraKeyboard(Context context) {
+    public CameraView(Context context) {
         this(context, null);
     }
 
-    public CameraKeyboard(Context context, AttributeSet attrs) {
+    public CameraView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setEGLContextClientVersion(3);
-        cameraKeyboardRender = new CameraKeyboardRender(context);
-        setRenderer(cameraKeyboardRender);
-        setRenderMode(RENDERMODE_CONTINUOUSLY);
+        cameraViewRender = new CameraViewRender(context);
+        setRenderer(cameraViewRender);
+        setRenderMode(RENDERMODE_WHEN_DIRTY);
         setFocusable(true);
     }
 
     public void move(Direction d) {
-        cameraKeyboardRender.move(d);
+        cameraViewRender.move(d, 0.05f);
+        requestRender();
+    }
+
+    public void move(Direction d, float cameraSpeed) {
+        cameraViewRender.move(d, cameraSpeed);
+        requestRender();
+    }
+
+    public void setYaw(float yaw) {
+        cameraViewRender.setYaw(yaw);
+        requestRender();
+    }
+
+    public void setPitch(float pitch) {
+        cameraViewRender.setPitch(pitch);
+        requestRender();
     }
 
     /**
