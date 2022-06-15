@@ -1,18 +1,12 @@
 package com.example.opengl;
 
 import android.os.Bundle;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.opengl.base.BaseActivity;
 import com.example.opengl.data.AngleType;
 import com.example.opengl.databinding.ActCameraViewBinding;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author wuzhanqiao

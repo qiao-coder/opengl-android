@@ -61,10 +61,8 @@ public class AngleView extends ControlView {
             speed = 0.1f;
         } else if (d > scopeCircleRadius * 2 / 5 && d <= scopeCircleRadius * 3 / 5) {
             speed = 0.2f;
-        } else if (d > scopeCircleRadius * 3 / 5 && d <= scopeCircleRadius * 4 / 5) {
+        } else if (d > scopeCircleRadius * 3 / 5) {
             speed = 0.4f;
-        } else if (d > scopeCircleRadius * 4 / 5) {
-            speed = 0.8f;
         }
         return speed * sign;
     }

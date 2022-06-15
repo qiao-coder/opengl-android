@@ -48,10 +48,8 @@ public class MoveView extends ControlView {
             speed = 0.02f;
         } else if (d > scopeCircleRadius * 2 / 5 && d <= scopeCircleRadius * 3 / 5) {
             speed = 0.04f;
-        } else if (d > scopeCircleRadius * 3 / 5 && d <= scopeCircleRadius * 4 / 5) {
+        } else if (d > scopeCircleRadius * 3 / 5) {
             speed = 0.08f;
-        } else if (d > scopeCircleRadius * 4 / 5) {
-            speed = 0.16f;
         }
         return speed;
     }

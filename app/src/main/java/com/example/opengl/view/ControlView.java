@@ -36,6 +36,7 @@ public abstract class ControlView extends View {
     private float x;
     private float y;
     private boolean isMove = false;
+    private boolean isUpdate = false;
     private float fingerCircleRadius;
     protected float scopeCircleRadius;
     private ValueAnimator moveTimer;
@@ -103,6 +104,7 @@ public abstract class ControlView extends View {
         canvas.drawCircle(x, y, fingerCircleRadius, fingerPaint);
         this.x = x;
         this.y = y;
+        isUpdate = true;
     }
 
     public abstract void onMove(float cx, float cy, float x, float y);
@@ -119,6 +121,8 @@ public abstract class ControlView extends View {
                 //发现Timer存在不准时的情况(并不是因为Android的Doze模式的影响)。
                 moveTimer = ValueAnimator.ofFloat(0, 1);
                 moveTimer.addUpdateListener(animation -> {
+                    //定时器刚执行时，可能还没有获取到有效的x、y
+                    if (!isUpdate) return;
                     onMove(cx, cy, x, y);
                 });
                 moveTimer.setDuration(1000);
@@ -133,6 +137,7 @@ public abstract class ControlView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 isMove = false;
+                isUpdate = false;
                 invalidate();
                 moveTimer.cancel();
                 break;
