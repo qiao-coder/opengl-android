@@ -107,8 +107,7 @@ public abstract class ControlView extends View {
 
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        Log.d(TAG, "dispatchTouchEvent: " + event);
+    public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 isMove = true;
