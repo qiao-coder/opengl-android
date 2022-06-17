@@ -10,22 +10,15 @@ import com.example.opengl.databinding.ActCameraBinding;
 
 /**
  * @author wuzhanqiao
- * @date 2022/5/16.
+ * @date 2022/6/17.
  */
-public class CameraActivity extends AppCompatActivity {
-
+public class LightActivity extends AppCompatActivity {
     private String[] data = {
-            "摄像头(绕中心点做圆周运动)",
-            "自由移动(位置移动)",
-            "视角移动(调整偏航角和俯仰角)",
-            "视角移动(缩放)",
+            "基础光照",
     };
 
     private Class[] activities = {
-            CameraCircleActivity.class,
-            CameraPositionActivity.class,
-            CameraViewActivity.class,
-            CameraFovActivity.class,
+            LightSampleActivity.class,
     };
 
     private ActCameraBinding binding;

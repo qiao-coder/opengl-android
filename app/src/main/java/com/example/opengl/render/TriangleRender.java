@@ -124,10 +124,6 @@ public class TriangleRender implements GLSurfaceView.Renderer {
         GLES20.glGenBuffers(1, vbo, 0);
         GLES20.glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     }
-//
-//    <div align="center">
-//<img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/MipMap_Example_STS101.jpg">
-//</div>
 
     private void bindVAO() {
         GLES30.glGenVertexArrays(1, vao, 0);

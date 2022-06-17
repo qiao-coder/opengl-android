@@ -36,6 +36,8 @@
         <activity
             android:name=".CameraFovActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity android:name=".LightSampleActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

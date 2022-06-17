@@ -9,7 +9,6 @@ import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLES32;
-import android.opengl.Matrix;
 
 import androidx.annotation.RawRes;
 
@@ -64,6 +63,12 @@ public class Shader {
         int location = GLES20.glGetUniformLocation(program, name);
         checkLocation(location);
         GLES20.glUniform1f(location, value);
+    }
+
+    public void setVec3(String name, float x, float y, float z) {
+        int location = GLES20.glGetUniformLocation(program, name);
+        checkLocation(location);
+        GLES20.glUniform3f(location, x, y, z);
     }
 
     public void setMatrix(String name, Mat4 mat4) {

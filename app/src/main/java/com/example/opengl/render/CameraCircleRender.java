@@ -114,7 +114,6 @@ public class CameraCircleRender extends BaseRender {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
         vao = bindSingleVAO();
-        bindSingleEBO();
         bindSingleVBO();
 
         shader = new Shader.Builder(context)
@@ -221,21 +220,6 @@ public class CameraCircleRender extends BaseRender {
             shader.setMatrix("model", model);
             GLES20.glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-
-//        Vec3 cameraPos = new Vec3(0.0f, 0.0f, 3.0f);
-//        Vec3 cameraTarget = new Vec3(0.0f, 0.0f, 0.0f);
-//        cameraTarget = cameraPos.minus(cameraTarget);
-//        //第二个参数其实就是用来接收返回结果的，等于cameraDirection
-//        Vec3 cameraDirection = glm.normalize(cameraTarget, new Vec3());
-//
-//        Vec3 up = new Vec3(0.0f, 1.0f, 0.0f);
-//        Vec3 cameraRight = glm.normalize(glm.cross(up, cameraDirection, new Vec3()), new Vec3());
-//
-//        Vec3 cameraUp = glm.cross(cameraDirection, cameraRight,new Vec3());
-//
-//        Mat4 view = glm.lookAt(new Vec3(0.0f, 0.0f, 3.0f),
-//                new Vec3(0.0f, 0.0f, 0.0f),
-//                new Vec3(0.0f, 1.0f, 0.0f));
     }
 
     public void setRadius(float radius) {

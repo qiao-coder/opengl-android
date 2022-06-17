@@ -115,7 +115,6 @@ public class CameraPositionRender extends BaseRender {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
         vao = bindSingleVAO();
-        bindSingleEBO();
         bindSingleVBO();
 
         shader = new Shader.Builder(context)
@@ -232,11 +231,11 @@ public class CameraPositionRender extends BaseRender {
     public void move(Direction d, float cameraSpeed) {
         switch (d) {
             case UP:
-                //即cameraPos += cameraSpeed * cameraFront
+                //即cameraPos += cameraFront * cameraSpeed
                 cameraPos = cameraPos.plus(cameraFront.times(cameraSpeed));
                 break;
             case DOWN:
-                //即cameraPos -= cameraSpeed * cameraFront;
+                //即cameraPos -= cameraFront * cameraSpeed;
                 cameraPos = cameraPos.minus(cameraFront.times(cameraSpeed));
                 break;
             case LEFT:

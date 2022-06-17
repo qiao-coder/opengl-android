@@ -1,24 +1,16 @@
 package com.example.opengl.view;
 
-import static com.example.opengl.data.Direction.DOWN;
-import static com.example.opengl.data.Direction.LEFT;
-import static com.example.opengl.data.Direction.RIGHT;
-import static com.example.opengl.data.Direction.UP;
-
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-
-import com.example.opengl.data.Direction;
 
 /**
  * @author wuzhanqiao
@@ -79,8 +71,9 @@ public abstract class ControlView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawCircle(cx, cy, scopeCircleRadius, scopePaint);
+//        canvas.drawCircle(cx, cy, scopeCircleRadius, scopePaint);
         if (!isMove) return;
+        canvas.drawCircle(cx, cy, scopeCircleRadius, scopePaint);
         float x = fingerX;
         float y = fingerY;
 
@@ -93,7 +86,7 @@ public abstract class ControlView extends View {
             float sin = (float) ((y - cy) / distCenter);
             float scopeX = cx + scopeCircleRadius * cos;
             float scopeY = cy + scopeCircleRadius * sin;
-            //调整FingerCircle落点位置，让FingerCircle刚好与ScopeCircle内切
+            //调整手指落点位置，让FingerCircle刚好与ScopeCircle内切
             x = scopeX + fingerCircleRadius * (-cos);
             y = scopeY + fingerCircleRadius * (-sin);
         }
