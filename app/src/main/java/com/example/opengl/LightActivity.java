@@ -14,11 +14,13 @@ import com.example.opengl.databinding.ActCameraBinding;
  */
 public class LightActivity extends AppCompatActivity {
     private String[] data = {
-            "基础光照",
+            "颜色",
+            "基本光照(环境光照、漫反射光照)",
     };
 
     private Class[] activities = {
             LightSampleActivity.class,
+            BasicLightingDiffuseActivity.class,
     };
 
     private ActCameraBinding binding;

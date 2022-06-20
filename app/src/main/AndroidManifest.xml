@@ -18,11 +18,7 @@
         </activity>
 
         <activity android:name=".CameraActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".CameraCircleActivity" />
@@ -36,7 +32,18 @@
         <activity
             android:name=".CameraFovActivity"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".LightSampleActivity"
+        <activity android:name=".LightActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LightSampleActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".BasicLightingDiffuseActivity"
             android:screenOrientation="sensorLandscape" />
     </application>
 

@@ -19,6 +19,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import glm_.mat4x4.Mat4;
+import glm_.vec3.Vec3;
 
 /**
  * @author wuzhanqiao
@@ -69,6 +70,12 @@ public class Shader {
         int location = GLES20.glGetUniformLocation(program, name);
         checkLocation(location);
         GLES20.glUniform3f(location, x, y, z);
+    }
+
+    public void setVec3(String name, Vec3 vec3) {
+        int location = GLES20.glGetUniformLocation(program, name);
+        checkLocation(location);
+        GLES20.glUniform3f(location, vec3.x, vec3.y, vec3.z);
     }
 
     public void setMatrix(String name, Mat4 mat4) {
