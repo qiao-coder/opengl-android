@@ -115,6 +115,10 @@ public class Camera {
         return fov;
     }
 
+    public Vec3 getPosition() {
+        return position;
+    }
+
 
     /**
      * 根据摄像机更新的欧拉角，重新计算front等向量

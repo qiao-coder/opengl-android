@@ -45,6 +45,9 @@
         <activity
             android:name=".BasicLightingDiffuseActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".BasicLightingSpecularActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

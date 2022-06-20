@@ -16,11 +16,13 @@ public class LightActivity extends AppCompatActivity {
     private String[] data = {
             "颜色",
             "基本光照(环境光照、漫反射光照)",
+            "基本光照(镜面光照)",
     };
 
     private Class[] activities = {
             LightSampleActivity.class,
             BasicLightingDiffuseActivity.class,
+            BasicLightingSpecularActivity.class,
     };
 
     private ActCameraBinding binding;
