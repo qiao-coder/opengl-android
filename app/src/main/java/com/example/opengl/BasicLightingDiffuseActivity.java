@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.example.opengl.base.BaseActivity;
 import com.example.opengl.data.AngleType;
-import com.example.opengl.databinding.ActBasicLightingBinding;
+import com.example.opengl.databinding.ActBasicLightingDiffuseBinding;
 
 /**
  * @author wuzhanqiao
@@ -16,7 +16,7 @@ public class BasicLightingDiffuseActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActBasicLightingBinding binding = ActBasicLightingBinding.inflate(getLayoutInflater());
+        ActBasicLightingDiffuseBinding binding = ActBasicLightingDiffuseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.moveView.setOnMoveListener((d, speed) -> {
