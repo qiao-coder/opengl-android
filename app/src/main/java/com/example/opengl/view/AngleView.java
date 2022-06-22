@@ -35,7 +35,8 @@ public class AngleView extends ControlView {
     public void onMove(float cx, float cy, float x, float y) {
         if (onAdjustListener == null) return;
         float dx = x - cx;
-        float dy = y - cy;
+        //android坐标系的y轴是向下增大的。我们想要的是向上移动时，偏航角变大
+        float dy = cy - y;
         float yawOffset = getAngleOffset(dx);
         if (yawOffset != 0) {
             yaw += yawOffset;
@@ -58,11 +59,11 @@ public class AngleView extends ControlView {
         d = Math.abs(d);
         float speed = 0.0f;
         if (d > scopeCircleRadius / 5 && d <= scopeCircleRadius * 2 / 5) {
-            speed = 0.1f;
+            speed = 0.5f;
         } else if (d > scopeCircleRadius * 2 / 5 && d <= scopeCircleRadius * 3 / 5) {
-            speed = 0.2f;
+            speed = 1f;
         } else if (d > scopeCircleRadius * 3 / 5) {
-            speed = 0.4f;
+            speed = 2f;
         }
         return speed * sign;
     }
