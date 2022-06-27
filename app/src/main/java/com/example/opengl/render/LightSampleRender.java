@@ -15,9 +15,7 @@ import android.opengl.GLES30;
 
 import com.example.opengl.R;
 import com.example.opengl.base.BaseRender;
-import com.example.opengl.base.Camera;
 import com.example.opengl.base.Shader;
-import com.example.opengl.data.Direction;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -83,7 +81,6 @@ public class LightSampleRender extends BaseRender {
     private Shader lightCubeShader;
     private int width;
     private int height;
-    private final Camera camera = new Camera(new Vec3(0.0f, 0.0f, 3.0f));
     private final Vec3 lightPos = new Vec3(1.2f, 1.0f, 2.0f);
 
     public LightSampleRender(Context context) {
@@ -170,21 +167,5 @@ public class LightSampleRender extends BaseRender {
 
         GLES30.glBindVertexArray(lightCubeVao[0]);
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 36);
-    }
-
-    public void move(Direction d, float cameraSpeed) {
-        camera.move(d, cameraSpeed);
-    }
-
-    public void setYaw(float yaw) {
-        camera.setYaw(yaw);
-    }
-
-    public void setPitch(float pitch) {
-        camera.setPitch(pitch);
-    }
-
-    public void setFov(float fov) {
-        camera.setFov(fov);
     }
 }

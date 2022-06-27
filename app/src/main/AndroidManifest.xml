@@ -48,6 +48,9 @@
         <activity
             android:name=".BasicLightingSpecularActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".MaterialsActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

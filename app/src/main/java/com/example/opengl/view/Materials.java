@@ -4,19 +4,19 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.example.opengl.base.BaseGLSurfaceView;
-import com.example.opengl.render.BasicLightingDiffuseRender;
+import com.example.opengl.render.MaterialsRender;
 
 /**
  * @author wuzhanqiao
  * @date 2022/4/12.
  */
-public class BasicLightingDiffuse extends BaseGLSurfaceView<BasicLightingDiffuseRender> {
+public class Materials extends BaseGLSurfaceView<MaterialsRender> {
 
-    public BasicLightingDiffuse(Context context) {
+    public Materials(Context context) {
         super(context);
     }
 
-    public BasicLightingDiffuse(Context context, AttributeSet attrs) {
+    public Materials(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 }

@@ -8,6 +8,11 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
+import android.view.MotionEvent;
+
+import com.example.opengl.data.Direction;
+
+import glm_.vec3.Vec3;
 
 /**
  * @author wuzhanqiao
@@ -18,6 +23,7 @@ public abstract class BaseRender implements GLSurfaceView.Renderer {
     protected Context context;
     protected final static int BYTES_PER_INT = 4;
     protected final static int BYTES_PER_FLOAT = 4;
+    protected Camera camera = new Camera(new Vec3(0.0f, 0.0f, 3.0f));
 
     public BaseRender(Context context) {
         this.context = context;
@@ -49,5 +55,25 @@ public abstract class BaseRender implements GLSurfaceView.Renderer {
         GLES20.glGenTextures(1, texture, 0);
         GLES20.glBindTexture(GL_TEXTURE_2D, texture[0]);
         return texture;
+    }
+
+    public void move(Direction d, float cameraSpeed) {
+        camera.move(d, cameraSpeed);
+    }
+
+    public void setYaw(float yaw) {
+        camera.setYaw(yaw);
+    }
+
+    public void setPitch(float pitch) {
+        camera.setPitch(pitch);
+    }
+
+    public void setFov(float fov) {
+        camera.setFov(fov);
+    }
+
+    public boolean handleZoom(MotionEvent event, int fingersMaxDistance) {
+        return camera.handleZoom(event, fingersMaxDistance);
     }
 }

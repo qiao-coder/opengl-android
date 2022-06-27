@@ -12,7 +12,6 @@ import static glm_.Java.glm;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
-import android.view.MotionEvent;
 
 import com.example.opengl.R;
 import com.example.opengl.base.BaseRender;
@@ -34,7 +33,7 @@ import glm_.vec3.Vec3;
  * @author wuzhanqiao
  * @date 2022/6/16.
  */
-public class BasicLightingSpecularRender extends BaseRender {
+public class MaterialsRender extends BaseRender {
     private final float vertices[] = {
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
             0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
@@ -84,9 +83,10 @@ public class BasicLightingSpecularRender extends BaseRender {
     private Shader lightCubeShader;
     private int width;
     private int height;
+    private final Camera camera = new Camera(new Vec3(0.0f, 0.0f, 3.0f));
     private final Vec3 lightPos = new Vec3(1.2f, 1.0f, 2.0f);
 
-    public BasicLightingSpecularRender(Context context) {
+    public MaterialsRender(Context context) {
         super(context);
     }
 
@@ -94,7 +94,7 @@ public class BasicLightingSpecularRender extends BaseRender {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         lightingShader = new Shader.Builder(context)
                 .setVertexShader(R.raw.vertex_basic_lighting_specular)
-                .setFragShader(R.raw.frag_basic_lighting_specular)
+                .setFragShader(R.raw.frag_materials)
                 .build();
 
         lightCubeShader = new Shader.Builder(context)
@@ -140,6 +140,8 @@ public class BasicLightingSpecularRender extends BaseRender {
         GLES20.glViewport(0, 0, width, height);
     }
 
+    private long startTime = -1;
+
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glEnable(GL_DEPTH_TEST);
@@ -148,10 +150,38 @@ public class BasicLightingSpecularRender extends BaseRender {
 
         //记得先激活着色器
         lightingShader.use();
-        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+//        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        //光属性
+//        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
         lightingShader.setVec3("lightPos", lightPos);
         lightingShader.setVec3("viewPos", camera.getPosition());
+//        lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+//        //将光照调暗了一些以搭配场景
+//        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+        //动态改变
+        float time = 0;
+        if (startTime == -1) {
+            startTime = System.currentTimeMillis();
+        } else {
+            time = (System.currentTimeMillis() - startTime) / 1000f;
+        }
+        Vec3 lightColor = new Vec3();
+        lightColor.x = (float) Math.sin(time * 2.0f);
+        lightColor.y = (float) Math.sin(time * 0.7f);
+        lightColor.z = (float) Math.sin(time * 1.3f);
+        Vec3 diffuseColor = lightColor.times(new Vec3(0.5f));
+        Vec3 ambientColor = diffuseColor.times(new Vec3(0.2f));
+        lightingShader.setVec3("light.ambient", ambientColor);
+        lightingShader.setVec3("light.diffuse", diffuseColor);
+        lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+        //材质属性
+        lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        //specular lighting doesn't have full effect on this object's material
+        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        lightingShader.setFloat("material.shininess", 32.0f);
+
 
         //view/projection transformations
         Mat4 projection = glm.perspective(glm.radians(camera.getFov()), (float) width / (float) height, 0.1f, 100.0f);
@@ -179,4 +209,19 @@ public class BasicLightingSpecularRender extends BaseRender {
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
+    public void move(Direction d, float cameraSpeed) {
+        camera.move(d, cameraSpeed);
+    }
+
+    public void setYaw(float yaw) {
+        camera.setYaw(yaw);
+    }
+
+    public void setPitch(float pitch) {
+        camera.setPitch(pitch);
+    }
+
+    public void setFov(float fov) {
+        camera.setFov(fov);
+    }
 }

@@ -2,6 +2,8 @@ package com.example.opengl.base;
 
 import static glm_.Java.glm;
 
+import android.view.MotionEvent;
+
 import com.example.opengl.data.Direction;
 
 import glm_.mat4x4.Mat4;
@@ -27,6 +29,7 @@ public class Camera {
     private float pitch = 0.0f;
     //camera选项
     private float fov = 45.0f;
+    private float lastDist = 0.0f;
 
     public Camera(Vec3 position) {
         this.position = position;
@@ -103,12 +106,16 @@ public class Camera {
     }
 
     public void setFov(float fov) {
+        this.fov = adjustFov(fov);
+    }
+
+    private float adjustFov(float fov) {
         if (fov > MAX_FOV) {
             fov = MAX_FOV;
         } else if (fov < MIN_FOV) {
             fov = MIN_FOV;
         }
-        this.fov = fov;
+        return fov;
     }
 
     public float getFov() {
@@ -134,5 +141,44 @@ public class Camera {
         //将向量标准化，因为你向上或向下看的次数越多，它们的长度就越接近0，从而导致运动变慢。
         right = glm.normalize(glm.cross(front, worldUp, new Vec3()), new Vec3());
         up = glm.normalize(glm.cross(right, front, new Vec3()), new Vec3());
+    }
+
+    public boolean handleZoom(MotionEvent event, int fingersMaximumDistance) {
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_POINTER_DOWN: {
+                //刚好双指
+                if (event.getPointerCount() == 2) {
+                    lastDist = getTwoFingersDistance(event);
+                }
+                break;
+            }
+            case MotionEvent.ACTION_MOVE: {
+                if (event.getPointerCount() == 2) {
+                    float dist = getTwoFingersDistance(event);
+                    float offset = getFovOffset(lastDist - dist, fingersMaximumDistance);
+                    lastDist = dist;
+                    float newFov = adjustFov(fov + offset);
+                    if (newFov != fov) {
+                        setFov(newFov);
+                        return true;
+                    }
+                }
+                break;
+            }
+        }
+        return false;
+    }
+
+    private float getTwoFingersDistance(MotionEvent event) {
+        float x0 = event.getX(0);
+        float y0 = event.getY(0);
+        float x1 = event.getX(1);
+        float y1 = event.getY(1);
+        return (float) Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
+    }
+
+    private float getFovOffset(float d, int fingersMaximumDistance) {
+        float unit = (MAX_FOV - MIN_FOV) / fingersMaximumDistance;
+        return d * unit;
     }
 }
