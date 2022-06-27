@@ -177,20 +177,4 @@ public class BasicLightingDiffuseRender extends BaseRender {
         GLES30.glBindVertexArray(lightCubeVao[0]);
         GLES20.glDrawArrays(GL_TRIANGLES, 0, 36);
     }
-
-    public void move(Direction d, float cameraSpeed) {
-        camera.move(d, cameraSpeed);
-    }
-
-    public void setYaw(float yaw) {
-        camera.setYaw(yaw);
-    }
-
-    public void setPitch(float pitch) {
-        camera.setPitch(pitch);
-    }
-
-    public void setFov(float fov) {
-        camera.setFov(fov);
-    }
 }
