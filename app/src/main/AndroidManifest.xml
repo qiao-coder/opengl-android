@@ -32,7 +32,7 @@
         <activity
             android:name=".CameraFovActivity"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".LightActivity">
+        <activity android:name=".LightingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,6 +50,12 @@
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MaterialsActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".LightingMapsDiffuseActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".LightingMapsSpecularActivity"
             android:screenOrientation="sensorLandscape" />
     </application>
 

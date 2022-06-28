@@ -17,7 +17,6 @@ import com.example.opengl.R;
 import com.example.opengl.base.BaseRender;
 import com.example.opengl.base.Camera;
 import com.example.opengl.base.Shader;
-import com.example.opengl.data.Direction;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -83,7 +82,6 @@ public class MaterialsRender extends BaseRender {
     private Shader lightCubeShader;
     private int width;
     private int height;
-    private final Camera camera = new Camera(new Vec3(0.0f, 0.0f, 3.0f));
     private final Vec3 lightPos = new Vec3(1.2f, 1.0f, 2.0f);
 
     public MaterialsRender(Context context) {
@@ -153,7 +151,8 @@ public class MaterialsRender extends BaseRender {
 //        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         //光属性
 //        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("lightPos", lightPos);
+//        lightingShader.setVec3("lightPos", lightPos);
+        lightingShader.setVec3("light.position", lightPos);
         lightingShader.setVec3("viewPos", camera.getPosition());
 //        lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
 //        //将光照调暗了一些以搭配场景

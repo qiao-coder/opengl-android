@@ -11,14 +11,16 @@ import com.example.opengl.databinding.ActCameraBinding;
 
 /**
  * @author wuzhanqiao
- * @date 2022/5/16.
+ * @date 2022/6/17.
  */
-public class CameraActivity extends AppCompatActivity {
-    private Pair<String, Class>[] data = new Pair[]{
-            new Pair<>("摄像头(绕中心点做圆周运动)", CameraCircleActivity.class),
-            new Pair<>("自由移动(位置移动)", CameraPositionActivity.class),
-            new Pair<>("视角移动(调整偏航角和俯仰角)", CameraViewActivity.class),
-            new Pair<>("视角移动(缩放)", CameraFovActivity.class),
+public class LightingActivity extends AppCompatActivity {
+    private Pair<String,Class>[] data = new Pair[]{
+            new Pair<>("颜色", LightSampleActivity.class),
+            new Pair<>("基本光照(环境光照、漫反射光照)", BasicLightingDiffuseActivity.class),
+            new Pair<>("基本光照(镜面光照)", BasicLightingSpecularActivity.class),
+            new Pair<>("材质", MaterialsActivity.class),
+            new Pair<>("光照贴图(漫反射贴图)", LightingMapsDiffuseActivity.class),
+            new Pair<>("光照贴图(镜面光贴图)", LightingMapsSpecularActivity.class),
     };
 
     private ActCameraBinding binding;

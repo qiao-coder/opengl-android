@@ -2,6 +2,7 @@ package com.example.opengl.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,11 @@ import com.example.opengl.databinding.ItemCameraBinding;
  */
 public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder> {
 
-    private final String[] data;
-    private final Class[] activities;
+    private final Pair<String, Class>[] data;
     private ItemCameraBinding binding;
 
-    public SampleAdapter(String[] data, Class[] activities) {
+    public SampleAdapter(Pair<String, Class>[] data) {
         this.data = data;
-        this.activities = activities;
     }
 
     @NonNull
@@ -35,10 +34,10 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        binding.tvTitle.setText(data[position]);
+        binding.tvTitle.setText(data[position].first);
         binding.tvTitle.setOnClickListener(v -> {
             Context context = holder.itemView.getContext();
-            context.startActivity(new Intent(context, activities[position]));
+            context.startActivity(new Intent(context, data[position].second));
         });
     }
 
