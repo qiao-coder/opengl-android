@@ -57,6 +57,9 @@
         <activity
             android:name=".LightingMapsSpecularActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".LightCastersDirectionalActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>
