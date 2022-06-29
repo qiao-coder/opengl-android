@@ -60,6 +60,9 @@
         <activity
             android:name=".LightCastersDirectionalActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".LightCastersPointActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

@@ -22,6 +22,7 @@ public class LightingActivity extends AppCompatActivity {
             new Pair<>("光照贴图(漫反射贴图)", LightingMapsDiffuseActivity.class),
             new Pair<>("光照贴图(镜面光贴图)", LightingMapsSpecularActivity.class),
             new Pair<>("投光物(定向光)", LightCastersDirectionalActivity.class),
+            new Pair<>("投光物(点光源)", LightCastersPointActivity.class)
     };
 
     private ActCameraBinding binding;
