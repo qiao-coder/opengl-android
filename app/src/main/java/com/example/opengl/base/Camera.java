@@ -126,6 +126,10 @@ public class Camera {
         return position;
     }
 
+    public Vec3 getFront() {
+        return front;
+    }
+
 
     /**
      * 根据摄像机更新的欧拉角，重新计算front等向量
