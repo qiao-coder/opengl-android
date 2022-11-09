@@ -25,6 +25,7 @@ public class LightingActivity extends AppCompatActivity {
             new Pair<>("投光物(点光源)", LightCastersPointActivity.class),
             new Pair<>("投光物(聚光)", LightCastersSpotActivity.class),
             new Pair<>("投光物(平滑/软化边缘)", LightCastersSpotSoftActivity.class),
+            new Pair<>("多光源", MultipleLightsActivity.class),
     };
 
     private ActCameraBinding binding;

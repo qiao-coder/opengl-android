@@ -69,6 +69,9 @@
         <activity
             android:name=".LightCastersSpotSoftActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".MultipleLightsActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>
