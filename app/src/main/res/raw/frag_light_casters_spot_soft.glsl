@@ -40,7 +40,7 @@ void main() {
     vec3 lightDir = normalize(light.position - FragPos);
 
     // 检查是否在聚光灯内
-    float theta = dot(lightDir, normalize(-light.direction));
+//    float theta = dot(lightDir, normalize(-light.direction));
 
     // 记住，点积返回的是一个余弦值而不是角度值。theta传的也是角度的余弦值。所以这里使用’>‘
 //    if (theta > light.cutOff) {

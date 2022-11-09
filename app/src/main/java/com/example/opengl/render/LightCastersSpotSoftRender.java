@@ -119,8 +119,8 @@ public class LightCastersSpotSoftRender extends BaseRender {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         lightingShader = new Shader.Builder(context)
-                .setVertexShader(R.raw.vertex_light_casters_spot)
-                .setFragShader(R.raw.frag_light_casters_spot)
+                .setVertexShader(R.raw.vertex_light_casters_spot_soft)
+                .setFragShader(R.raw.frag_light_casters_spot_soft)
                 .build();
 
         lightCubeShader = new Shader.Builder(context)
