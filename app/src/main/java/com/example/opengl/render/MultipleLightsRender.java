@@ -239,7 +239,7 @@ public class MultipleLightsRender extends BaseRender {
         lightingShader.setFloat("pointLights[3].constant", 1.0f);
         lightingShader.setFloat("pointLights[3].linear", 0.09f);
         lightingShader.setFloat("pointLights[3].quadratic", 0.032f);
-        // spotLight
+        // 聚光
         lightingShader.setVec3("spotLight.position", camera.getPosition());
         lightingShader.setVec3("spotLight.direction", camera.getFront());
         lightingShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
