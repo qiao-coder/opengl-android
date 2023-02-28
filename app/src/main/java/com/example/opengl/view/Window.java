@@ -4,6 +4,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
+import com.example.opengl.render.WindowRender;
+
 /**
  * @author Q
  * @date 2023/2/28.
