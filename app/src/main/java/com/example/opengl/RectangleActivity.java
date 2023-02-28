@@ -7,16 +7,16 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.opengl.view.Triangle;
+import com.example.opengl.view.Rectangle;
 
 /**
  * @author Q
  * @date 2023/2/28.
  */
-public class TriangleActivity extends AppCompatActivity {
+public class RectangleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupView(this, new Triangle(this));
+        setupView(this, new Rectangle(this));
     }
 }
