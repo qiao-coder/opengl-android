@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.opengl.base.SampleAdapter;
 import com.example.opengl.databinding.ActBasicBinding;
-import com.example.opengl.view.Window;
 
 /**
  * @author Q
@@ -18,7 +17,10 @@ public class BasicActivity extends AppCompatActivity {
     private Pair<String, Class>[] data = new Pair[]{
             new Pair<>("创建窗口", WindowActivity.class),
             new Pair<>("三角形", TriangleActivity.class),
-            new Pair<>("矩形", RectangleActivity.class),
+            new Pair<>("三角形（矩形）", RectangleActivity.class),
+            new Pair<>("着色器（红色三角形）", RedTriangleActivity.class),
+            new Pair<>("着色器（变色三角形）", DynamicColorTriangleActivity.class),
+            new Pair<>("着色器（三色三角形）", RGBTriangleActivity.class),
     };
 
     private ActBasicBinding binding;

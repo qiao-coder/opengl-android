@@ -25,6 +25,12 @@
 
         <activity android:name=".RectangleActivity" />
 
+        <activity android:name=".RedTriangleActivity" />
+
+        <activity android:name=".DynamicColorTriangleActivity" />
+
+        <activity android:name=".RGBTriangleActivity" />
+
         <activity android:name=".CameraActivity">
 
         </activity>
