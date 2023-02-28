@@ -39,6 +39,18 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+//        pickFirst 'liblwjgl_opengl.so.sha1'
+//        pickFirst 'libglfw_wayland.so.sha1'
+//        pickFirst 'liblwjgl.so.sha1'
+//        pickFirst 'libglfw.so.sha1'
+//        pickFirst 'libopenal.so.sha1'
+//        pickFirst 'liblwjgl_tootle.so.sha1'
+//        pickFirst 'liblwjgl_stb.so.sha1'
+//        pickFirst 'libjemalloc.so.sha1'
+        pickFirst 'logo-mini.png'
+        pickFirst 'META-INF/INDEX.LIST'
+    }
 }
 
 dependencies {
@@ -51,7 +63,30 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 //    implementation 'de.bixilon:kotlin-glm:0.9.9.1-6'
     implementation 'com.github.kotlin-graphics:glm:v1.0.1'
+//    implementation("com.github.qiao-coder:glm:0.9.9.1-6")
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.21'
-//    implementation "org.lwjgl:lwjgl:3.3.1"
-//    implementation "org.lwjgl:lwjgl-glfw:3.3.1"
+//    implementation 'com.github.kotlin-graphics.uno-sdk:uno-awt:v0.7.8'
+//    implementation "org.lwjgl:lwjgl:3.2.3"
+//    implementation "org.lwjgl:lwjgl-glfw:3.2.3"
+//    implementation 'org.lwjgl:lwjgl-vulkan:3.2.3'
+//    runtimeOnly 'org.lwjgl:lwjgl-jemalloc:3.2.3'
+//    implementation 'org.lwjgl:lwjgl-opengl:3.2.3'
+//    implementation 'org.lwjgl:lwjgl-openal:3.2.3'
+//    implementation 'org.lwjgl:lwjgl-stb:3.2.3'
+//    implementation 'org.lwjgl:lwjgl-jawt:3.2.3'
+//    implementation 'org.lwjgl:lwjgl-opengles:3.2.3'
+
+//    implementation ('com.github.kotlin-graphics:assimp:v4.0-beta.13')
+//    implementation 'com.github.kotlin-graphics:assimp:v4.0-beta17'
+//    implementation ('com.github.qiao-coder:assimp:4.0.4')
+//            {
+//        exclude module: 'glm'
+//        exclude module:'unsigned'
+//    }
+//    implementation 'com.github.xianzhu21:android-assimp:v4.0-beta.16'
+//            {
+//        exclude module: 'glm'
+//    }
+
+//    implementation project(":assimp")
 }

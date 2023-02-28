@@ -10,12 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Openglandroid">
         <activity android:name=".MainActivity">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <activity android:name=".BasicActivity"/>
+
+        <activity
+            android:name=".WindowActivity"/>
 
         <activity android:name=".CameraActivity">
 
@@ -33,11 +38,11 @@
             android:name=".CameraFovActivity"
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".LightingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".LightSampleActivity"
@@ -71,6 +76,9 @@
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MultipleLightsActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".ModelLoadingActivity"
             android:screenOrientation="sensorLandscape" />
     </application>
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.opengl.base.SampleAdapter;
 import com.example.opengl.databinding.ActCameraBinding;
+import com.example.opengl.databinding.ActLightingBinding;
 
 /**
  * @author wuzhanqiao
@@ -28,12 +29,12 @@ public class LightingActivity extends AppCompatActivity {
             new Pair<>("多光源", MultipleLightsActivity.class),
     };
 
-    private ActCameraBinding binding;
+    private ActLightingBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActCameraBinding.inflate(getLayoutInflater());
+        binding = ActLightingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         SampleAdapter sampleAdapter = new SampleAdapter(data);

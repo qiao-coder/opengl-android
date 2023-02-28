@@ -44,6 +44,10 @@ public class Shader {
         program = createShaderProgram();
     }
 
+    public int getId() {
+        return program;
+    }
+
     public void use() {
         GLES20.glUseProgram(program);
     }

@@ -4,6 +4,7 @@ import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;
 import static com.example.opengl.util.ContextUtil.dp2px;
 
 import android.app.Activity;
+import android.opengl.GLSurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,6 +22,38 @@ import com.example.opengl.view.MoveView;
  * @date 2022/6/23.
  */
 public class SampleUIUtil {
+    public static void setupView(Activity activity, GLSurfaceView renderView) {
+        renderView.setId(View.generateViewId());
+
+        renderView.setLayoutParams(new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,
+                ConstraintLayout.LayoutParams.MATCH_PARENT));
+
+        ConstraintLayout constraintLayout = new ConstraintLayout(activity);
+        constraintLayout.setLayoutParams(new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,
+                ConstraintLayout.LayoutParams.MATCH_PARENT));
+
+        constraintLayout.addView(renderView);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+
+        constraintSet.constrainWidth(renderView.getId(), ConstraintSet.MATCH_CONSTRAINT);
+        constraintSet.constrainHeight(renderView.getId(), ConstraintSet.MATCH_CONSTRAINT);
+        constraintSet.connect(renderView.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
+        constraintSet.connect(renderView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
+        constraintSet.connect(renderView.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+        constraintSet.connect(renderView.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+
+        constraintLayout.setConstraintSet(constraintSet);
+
+
+        constraintSet.applyTo(constraintLayout);
+
+        activity.setContentView(constraintLayout);
+    }
+
     public static <T extends BaseRender> void setupView(Activity activity, BaseGLSurfaceView<T> renderView, T render) {
         setupView(activity, renderView, render, RENDERMODE_WHEN_DIRTY);
     }
