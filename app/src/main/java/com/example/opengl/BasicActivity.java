@@ -17,6 +17,7 @@ import com.example.opengl.view.Window;
 public class BasicActivity extends AppCompatActivity {
     private Pair<String, Class>[] data = new Pair[]{
             new Pair<>("创建窗口", WindowActivity.class),
+            new Pair<>("三角形", TriangleActivity.class),
     };
 
     private ActBasicBinding binding;

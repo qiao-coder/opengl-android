@@ -17,10 +17,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".BasicActivity"/>
+        <activity android:name=".BasicActivity" />
 
-        <activity
-            android:name=".WindowActivity"/>
+        <activity android:name=".WindowActivity" />
+
+        <activity android:name=".TriangleActivity" />
 
         <activity android:name=".CameraActivity">
 
@@ -38,7 +39,7 @@
             android:name=".CameraFovActivity"
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".LightingActivity">
-<!--            <intent-filter>-->
+            <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
 
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
