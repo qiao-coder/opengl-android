@@ -39,6 +39,12 @@
 
         <activity android:name=".RotatingWoodenBoxActivity" />
 
+        <activity android:name=".CoordinateSystemsActivity" />
+
+        <activity android:name=".CoordinateSystemsDepthActivity" />
+
+        <activity android:name=".CoordinateSystemsMultipleActivity" />
+
         <activity android:name=".CameraActivity">
 
         </activity>
