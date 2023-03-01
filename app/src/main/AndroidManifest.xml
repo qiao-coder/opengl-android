@@ -31,6 +31,12 @@
 
         <activity android:name=".RGBTriangleActivity" />
 
+        <activity android:name=".WoodenBoxActivity" />
+
+        <activity android:name=".ColouredWoodenBoxActivity" />
+
+        <activity android:name=".LaughingWoodenBoxActivity" />
+
         <activity android:name=".CameraActivity">
 
         </activity>

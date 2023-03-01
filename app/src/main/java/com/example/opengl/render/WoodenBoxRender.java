@@ -36,13 +36,13 @@ import javax.microedition.khronos.opengles.GL10;
  * @author wuzhanqiao
  * @date 2022/5/2.
  */
-public class TextureRender extends BaseRender {
+public class WoodenBoxRender extends BaseRender {
     private float vertices[] = {
-//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
-            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // 右上
-            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,   // 右下
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,   // 左下
-            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f    // 左上
+            //  ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+            0.5f, 0.5f, 0.0f,       1.0f, 0.0f, 0.0f,    1.0f, 0.0f,   // 右上
+            0.5f, -0.5f, 0.0f,      0.0f, 1.0f, 0.0f,    1.0f, 1.0f,   // 右下
+            -0.5f, -0.5f, 0.0f,     0.0f, 0.0f, 1.0f,    0.0f, 1.0f,   // 左下
+            -0.5f, 0.5f, 0.0f,       1.0f, 1.0f, 0.0f,   0.0f, 0.0f    // 左上
     };
 
     private int[] indices = { // 注意索引从0开始!
@@ -53,9 +53,8 @@ public class TextureRender extends BaseRender {
     private int[] vao;
     private Shader shader;
     private int[] texture1;
-    private int[] texture2;
 
-    public TextureRender(Context context) {
+    public WoodenBoxRender(Context context) {
         super(context);
     }
 
@@ -67,8 +66,8 @@ public class TextureRender extends BaseRender {
         bindSingleVBO();
 
         shader = new Shader.Builder(context)
-                .setVertexShader(R.raw.vertex_texture)
-                .setFragShader(R.raw.frag_texture)
+                .setVertexShader(R.raw.vertex_wooden_box)
+                .setFragShader(R.raw.frag_wooden_box)
                 .build();
 
         //创建、绑定、填充第一个纹理
@@ -79,18 +78,9 @@ public class TextureRender extends BaseRender {
         GLUtils.texImage2D(GL_TEXTURE_2D, 0, bitmap, 0);
         GLES20.glGenerateMipmap(GL_TEXTURE_2D);
 
-        //创建、绑定、填充第二个纹理
-        texture2 = bindSingleTexture2D();
-        GLES20.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        GLES20.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.awesomeface);
-        GLUtils.texImage2D(GL_TEXTURE_2D, 0, bitmap2, 0);
-        GLES20.glGenerateMipmap(GL_TEXTURE_2D);
-
         //使用glUniform1i告诉OpenGL每个着色器采样器属于哪个纹理单元
         shader.use();
         shader.setInt("texture1",0);
-        shader.setInt("texture2", 1);
 
         IntBuffer indicesBuffer = ByteBuffer
                 .allocateDirect(indices.length * BYTES_PER_INT)
@@ -133,8 +123,6 @@ public class TextureRender extends BaseRender {
 
         GLES20.glActiveTexture(GL_TEXTURE0);
         GLES20.glBindTexture(GL_TEXTURE_2D, texture1[0]);
-        GLES20.glActiveTexture(GL_TEXTURE1);
-        GLES20.glBindTexture(GL_TEXTURE_2D, texture2[0]);
 
         shader.use();
         GLES30.glBindVertexArray(vao[0]);

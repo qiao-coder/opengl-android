@@ -19,36 +19,30 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.GLUtils;
-import android.util.Log;
 
 import com.example.opengl.R;
+import com.example.opengl.base.BaseRender;
 import com.example.opengl.base.Shader;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.Calendar;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import static glm_.Java.glm;
-
-import glm_.mat4x4.Mat4;
-import glm_.vec3.Vec3;
-
 /**
  * @author wuzhanqiao
- * @date 2022/5/6.
+ * @date 2022/5/2.
  */
-public class MatrixTransformRender extends LaughingWoodenBoxRender {
-    float[] vertices = {
-//            ---- 位置 ----       - 纹理坐标 -
-            0.5f, 0.5f, 0.0f, 1.0f, 1.0f,   // 右上
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,   // 右下
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,   // 左下
-            -0.5f, 0.5f, 0.0f, 0.0f, 1.0f    // 左上
+public class LaughingWoodenBoxRender extends BaseRender {
+    private float vertices[] = {
+//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // 右上
+            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,   // 右下
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,   // 左下
+            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f    // 左上
     };
 
     private int[] indices = { // 注意索引从0开始!
@@ -61,7 +55,7 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
     private int[] texture1;
     private int[] texture2;
 
-    public MatrixTransformRender(Context context) {
+    public LaughingWoodenBoxRender(Context context) {
         super(context);
     }
 
@@ -73,8 +67,8 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
         bindSingleVBO();
 
         shader = new Shader.Builder(context)
-                .setVertexShader(R.raw.vertex_texture_transform)
-                .setFragShader(R.raw.frag_texture_transform)
+                .setVertexShader(R.raw.vertex_wooden_box)
+                .setFragShader(R.raw.frag_laughing_wooden_box)
                 .build();
 
         //创建、绑定、填充第一个纹理
@@ -95,25 +89,8 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
 
         //使用glUniform1i告诉OpenGL每个着色器采样器属于哪个纹理单元
         shader.use();
-        shader.setInt("texture1", 0);
+        shader.setInt("texture1",0);
         shader.setInt("texture2", 1);
-
-        Mat4 trans = new Mat4();
-        //逆时针旋转90度(注意，有纹理的那面矩形是在XY平面上的)。
-        //GLM希望它的角度是弧度制的(Radian)。所以使用glm.radians将角度转化为弧度。
-        trans = glm.rotate(trans, glm.radians(90.0f), new Vec3(0.0, 0.0, 1.0));
-        //在每个轴都缩放到0.5倍。
-        trans = glm.scale(trans, new Vec3(0.5, 0.5, 0.5));
-        //trans是包括了多个变换的变换矩阵。
-
-        shader.setMatrix("transform", trans);
-
-        //使用android.opengl.Matrix
-//        float[] matrix = new float[16];
-//        Matrix.setIdentityM(matrix, 0);
-//        Matrix.rotateM(matrix, 0, 90, 0, 0, 1);
-//        Matrix.scaleM(matrix, 0, 0.5f, 0.5f, 0.5f);
-//        shader.setMatrix("transform", matrix);
 
         IntBuffer indicesBuffer = ByteBuffer
                 .allocateDirect(indices.length * BYTES_PER_INT)
@@ -133,11 +110,14 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
         GLES20.glBufferData(GL_ARRAY_BUFFER, vertices.length * 4, verticesBuffer, GL_STATIC_DRAW);
 
 
-        GLES20.glVertexAttribPointer(0, 3, GL_FLOAT, false, 5 * BYTES_PER_FLOAT, 0);
+        GLES20.glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * BYTES_PER_FLOAT, 0);
         GLES20.glEnableVertexAttribArray(0);
 
-        GLES20.glVertexAttribPointer(1, 2, GL_FLOAT, false, 5 * BYTES_PER_FLOAT, 3 * BYTES_PER_FLOAT);
+        GLES20.glVertexAttribPointer(1, 3, GL_FLOAT, false, 8 * BYTES_PER_FLOAT, 3 * BYTES_PER_FLOAT);
         GLES20.glEnableVertexAttribArray(1);
+
+        GLES20.glVertexAttribPointer(2, 2, GL_FLOAT, false, 8 * BYTES_PER_FLOAT, 6 * BYTES_PER_FLOAT);
+        GLES20.glEnableVertexAttribArray(2);
     }
 
 
@@ -148,7 +128,6 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        Log.d(TAG,"onDrawFrame");
         GLES20.glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         GLES20.glClear(GL_COLOR_BUFFER_BIT);
 
@@ -156,12 +135,6 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
         GLES20.glBindTexture(GL_TEXTURE_2D, texture1[0]);
         GLES20.glActiveTexture(GL_TEXTURE1);
         GLES20.glBindTexture(GL_TEXTURE_2D, texture2[0]);
-
-        int i = Calendar.getInstance().get(Calendar.MILLISECOND);
-        Mat4 trans = new Mat4();
-        trans = glm.translate(trans, new Vec3(0.5, -0.5, 0.0));
-        trans = glm.rotate(trans, glm.radians(i * 360 / 1000), new Vec3(0.0, -0.0, 1));
-        shader.setMatrix("transform", trans);
 
         shader.use();
         GLES30.glBindVertexArray(vao[0]);

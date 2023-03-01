@@ -21,6 +21,9 @@ public class BasicActivity extends AppCompatActivity {
             new Pair<>("着色器（红色三角形）", RedTriangleActivity.class),
             new Pair<>("着色器（变色三角形）", DynamicColorTriangleActivity.class),
             new Pair<>("着色器（三色三角形）", RGBTriangleActivity.class),
+            new Pair<>("纹理（木箱）", WoodenBoxActivity.class),
+            new Pair<>("纹理（彩色木箱）", ColouredWoodenBoxActivity.class),
+            new Pair<>("纹理（会笑的木箱）", LaughingWoodenBoxActivity.class),
     };
 
     private ActBasicBinding binding;
