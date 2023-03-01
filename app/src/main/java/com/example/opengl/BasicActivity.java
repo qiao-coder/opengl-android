@@ -28,6 +28,10 @@ public class BasicActivity extends AppCompatActivity {
             new Pair<>("坐标系统（透视）", CoordinateSystemsActivity.class),
             new Pair<>("坐标系统（3D木箱）", CoordinateSystemsDepthActivity.class),
             new Pair<>("坐标系统（多个3D木箱）", CoordinateSystemsMultipleActivity.class),
+            new Pair<>("摄像头(绕中心点做圆周运动)", CameraCircleActivity.class),
+            new Pair<>("摄像头(自由移动)", CameraPositionActivity.class),
+            new Pair<>("摄像头(调整偏航角和俯仰角)", CameraViewActivity.class),
+            new Pair<>("摄像头(双指缩放视野)", CameraFovActivity.class),
     };
 
     private ActBasicBinding binding;
