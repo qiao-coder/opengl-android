@@ -42,7 +42,7 @@ import glm_.vec3.Vec3;
  * @author wuzhanqiao
  * @date 2022/5/6.
  */
-public class MatrixTransformRender extends LaughingWoodenBoxRender {
+public class RotatingWoodenBoxRender extends LaughingWoodenBoxRender {
     float[] vertices = {
 //            ---- 位置 ----       - 纹理坐标 -
             0.5f, 0.5f, 0.0f, 1.0f, 1.0f,   // 右上
@@ -61,7 +61,7 @@ public class MatrixTransformRender extends LaughingWoodenBoxRender {
     private int[] texture1;
     private int[] texture2;
 
-    public MatrixTransformRender(Context context) {
+    public RotatingWoodenBoxRender(Context context) {
         super(context);
     }
 

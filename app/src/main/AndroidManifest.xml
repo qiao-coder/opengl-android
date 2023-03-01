@@ -37,6 +37,8 @@
 
         <activity android:name=".LaughingWoodenBoxActivity" />
 
+        <activity android:name=".RotatingWoodenBoxActivity" />
+
         <activity android:name=".CameraActivity">
 
         </activity>

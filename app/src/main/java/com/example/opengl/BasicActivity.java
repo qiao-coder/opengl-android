@@ -24,6 +24,7 @@ public class BasicActivity extends AppCompatActivity {
             new Pair<>("纹理（木箱）", WoodenBoxActivity.class),
             new Pair<>("纹理（彩色木箱）", ColouredWoodenBoxActivity.class),
             new Pair<>("纹理（会笑的木箱）", LaughingWoodenBoxActivity.class),
+            new Pair<>("变换（旋转的木箱）", RotatingWoodenBoxActivity.class),
     };
 
     private ActBasicBinding binding;
