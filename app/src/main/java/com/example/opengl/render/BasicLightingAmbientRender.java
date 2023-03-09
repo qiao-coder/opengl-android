@@ -17,7 +17,6 @@ import com.example.opengl.R;
 import com.example.opengl.base.BaseRender;
 import com.example.opengl.base.Camera;
 import com.example.opengl.base.Shader;
-import com.example.opengl.data.Direction;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -33,7 +32,7 @@ import glm_.vec3.Vec3;
  * @author wuzhanqiao
  * @date 2022/6/16.
  */
-public class BasicLightingDiffuseRender extends BaseRender {
+public class BasicLightingAmbientRender extends BaseRender {
     private final float vertices[] = {
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
             0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
@@ -85,15 +84,15 @@ public class BasicLightingDiffuseRender extends BaseRender {
     private int height;
     private final Vec3 lightPos = new Vec3(1.2f, 1.0f, 2.0f);
 
-    public BasicLightingDiffuseRender(Context context) {
+    public BasicLightingAmbientRender(Context context) {
         super(context);
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         lightingShader = new Shader.Builder(context)
-                .setVertexShader(R.raw.vertex_basic_lighting_diffuse)
-                .setFragShader(R.raw.frag_basic_lighting_diffuse)
+                .setVertexShader(R.raw.vertex_basic_lighting_ambient)
+                .setFragShader(R.raw.frag_basic_lighting_ambient)
                 .build();
 
         lightCubeShader = new Shader.Builder(context)
@@ -149,7 +148,6 @@ public class BasicLightingDiffuseRender extends BaseRender {
         lightingShader.use();
         lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("lightPos", lightPos);
 
         //view/projection transformations
         Mat4 projection = glm.perspective(glm.radians(camera.getFov()), (float) width / (float) height, 0.1f, 100.0f);

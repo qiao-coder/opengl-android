@@ -2,7 +2,9 @@ package com.example.opengl;
 
 import static com.example.opengl.util.SampleUIUtil.setupView;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 

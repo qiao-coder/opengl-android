@@ -71,6 +71,9 @@
             android:name=".LightSampleActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
+            android:name=".BasicLightingAmbientActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
             android:name=".BasicLightingDiffuseActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
