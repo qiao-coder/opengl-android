@@ -4,19 +4,19 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.example.opengl.base.BaseGLSurfaceView;
-import com.example.opengl.render.MaterialsRender;
+import com.example.opengl.render.MaterialAndLightRender;
 
 /**
  * @author wuzhanqiao
  * @date 2022/4/12.
  */
-public class Materials extends BaseGLSurfaceView<MaterialsRender> {
+public class MaterialAndLight extends BaseGLSurfaceView<MaterialAndLightRender> {
 
-    public Materials(Context context) {
+    public MaterialAndLight(Context context) {
         super(context);
     }
 
-    public Materials(Context context, AttributeSet attrs) {
+    public MaterialAndLight(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 }

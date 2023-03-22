@@ -8,20 +8,20 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.example.opengl.base.BaseActivity;
-import com.example.opengl.render.MaterialsRender;
-import com.example.opengl.view.Materials;
+import com.example.opengl.render.MaterialRender;
+import com.example.opengl.view.Material;
 
 /**
  * @author wuzhanqiao
  * @date 2022/6/23.
  */
-public class MaterialsActivity extends BaseActivity {
+public class MaterialActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupView(this,
-                new Materials(this),
-                new MaterialsRender(this),
+                new Material(this),
+                new MaterialRender(this),
                 RENDERMODE_CONTINUOUSLY);
     }
 }

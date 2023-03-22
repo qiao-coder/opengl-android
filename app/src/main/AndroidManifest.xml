@@ -80,7 +80,13 @@
             android:name=".BasicLightingSpecularActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name=".MaterialsActivity"
+            android:name=".MaterialActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".MaterialAndLightActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".MaterialWithLightChangeActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".LightingMapsDiffuseActivity"

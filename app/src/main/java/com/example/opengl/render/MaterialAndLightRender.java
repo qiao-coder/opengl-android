@@ -15,7 +15,6 @@ import android.opengl.GLES30;
 
 import com.example.opengl.R;
 import com.example.opengl.base.BaseRender;
-import com.example.opengl.base.Camera;
 import com.example.opengl.base.Shader;
 
 import java.nio.ByteBuffer;
@@ -32,7 +31,7 @@ import glm_.vec3.Vec3;
  * @author wuzhanqiao
  * @date 2022/6/16.
  */
-public class MaterialsRender extends BaseRender {
+public class MaterialAndLightRender extends BaseRender {
     private final float vertices[] = {
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
             0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
@@ -84,7 +83,7 @@ public class MaterialsRender extends BaseRender {
     private int height;
     private final Vec3 lightPos = new Vec3(1.2f, 1.0f, 2.0f);
 
-    public MaterialsRender(Context context) {
+    public MaterialAndLightRender(Context context) {
         super(context);
     }
 
@@ -92,7 +91,7 @@ public class MaterialsRender extends BaseRender {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         lightingShader = new Shader.Builder(context)
                 .setVertexShader(R.raw.vertex_basic_lighting_specular)
-                .setFragShader(R.raw.frag_materials)
+                .setFragShader(R.raw.frag_material_and_light)
                 .build();
 
         lightCubeShader = new Shader.Builder(context)
@@ -148,38 +147,25 @@ public class MaterialsRender extends BaseRender {
 
         //记得先激活着色器
         lightingShader.use();
+        //不再使用简单的物体颜色，改用材质
 //        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        //光属性
-//        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-//        lightingShader.setVec3("lightPos", lightPos);
-        lightingShader.setVec3("light.position", lightPos);
-        lightingShader.setVec3("viewPos", camera.getPosition());
-//        lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-//        //将光照调暗了一些以搭配场景
-//        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-        //动态改变
-        float time = 0;
-        if (startTime == -1) {
-            startTime = System.currentTimeMillis();
-        } else {
-            time = (System.currentTimeMillis() - startTime) / 1000f;
-        }
-        Vec3 lightColor = new Vec3();
-        lightColor.x = (float) Math.sin(time * 2.0f);
-        lightColor.y = (float) Math.sin(time * 0.7f);
-        lightColor.z = (float) Math.sin(time * 1.3f);
-        Vec3 diffuseColor = lightColor.times(new Vec3(0.5f));
-        Vec3 ambientColor = diffuseColor.times(new Vec3(0.2f));
-        lightingShader.setVec3("light.ambient", ambientColor);
-        lightingShader.setVec3("light.diffuse", diffuseColor);
-        lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-
         //材质属性
         lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
         lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
         //specular lighting doesn't have full effect on this object's material
         lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
         lightingShader.setFloat("material.shininess", 32.0f);
+
+        lightingShader.setVec3("viewPos", camera.getPosition());
+        //光属性
+        //不再使用简单的光照颜色，改用通过light设置各个光照分量、光源位置
+//        lightingShader.setVec3("lightPos", lightPos);
+//        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+        lightingShader.setVec3("light.position", lightPos);
+        lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+        //将光照调暗了一些以搭配场景
+        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+        lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
 
         //view/projection transformations
